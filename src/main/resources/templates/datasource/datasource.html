@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorator="base">
+<head>
+     <meta charset="utf-8">
+    <div layout:fragment="style"><link type="text/css" rel="stylesheet"
+	href="/css/dist/view/view.min.css"></div>
+</head>
+    <body>
+    	 	<div layout:fragment="content" class="main">
+
+    	 			<div class="datasource-content">
+						<div class="new-datasource">
+							<a href="/datasources/new" >创建数据源 </a>
+						</div>
+
+    	 				<table class="database-table">
+    	 					<thead>
+    	 					<tr>
+    	 						<th>数据源</th>
+    	 						<th>类型</th>
+    	 						<th>创建时间</th>
+    	 						<th>修改时间</th>
+    	 						<th>描述</th>
+								<th>操作</th>
+    	 					</tr>
+    	 					</thead>
+    	 					<tbody>
+    	 					<tr th:each="dataSource:${dataSources}">
+    	 						<td th:text="${dataSource.name}"></td>	
+    	 						<td th:text="${dataSource.type}"></td>
+    	 						<td th:text="${dataSource.createdTime}"></td>
+    	 						<td th:text="${dataSource.updatedTime}"></td>
+    	 						<td th:text="${dataSource.description}"></td>
+								<td><a th:href="@{/datasources/delete(uid=${dataSource.uid})}" onclick="javascript:if(!confirm('确定要删除选择的信息吗？\n此操作不可以恢复！')) { return false; }"> <i class="glyphicon glyphicon-trash"></i> </a></td>
+    	 					</tr>
+    	 					</tbody>
+    	 				</table>	
+    	 			</div>
+    	 	</div>
+    </body>
+</html>

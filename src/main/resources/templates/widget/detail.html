@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	   xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	   layout:decorator="base">
+<head>
+	<div layout:fragment="style"><link type="text/css" rel="stylesheet" href="/css/dist/view/view.min.css"></div>
+</head>
+<body>
+<div  layout:fragment="content">
+	<div th:class="${widget.isCanvas}?'canvas-layout main':'main'">
+	<div  class="main-tab-content">
+<div id="container" ng-controller="singleController">
+	<input type="hidden" th:value="${id}" id="widget_id"/>
+	<x-widget-container component="component"></x-widget-container>
+</div>
+		</div>
+		</div>
+	</div>
+
+<div layout:fragment="script">
+<script type="text/javascript" src="/js/common/post_wrapper.js"></script>
+<script type="text/javascript" src="/js/dist/view/app.js"></script>
+<script>
+	_.mixin(s.exports());
+	angular.element(document).ready(
+			function() {
+				angular.bootstrap(document.getElementById("container"),
+						[ 'dashboard' ]);
+			})
+</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.login-container {
+    margin-top:100px;
+}
+.login-form-container {
+    border: 1px solid #ddd;
+}
+
+.login-header {
+    padding: 10px 20px;
+    margin: 0;
+    background: linear-gradient(#fff,#e6e6e6);
+}
+
+.login-form {
+    padding:20px;
+}
+
+footer {
+    position:absolute;
+    bottom:0px;
+    width:100%;
+}
+.login-form b{
+	padding: 5px;
+	color:#c74a4a;
+}

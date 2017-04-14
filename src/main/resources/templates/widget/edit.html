@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/css/common/bootstrap.min.css"></link>
+		<link type="text/css" rel="stylesheet" href="/css/common/font-awesome.min.css"></link>
+		<link type="text/css" rel="stylesheet" href="/css/common/jquery-ui.min.css"></link>
+		<link type="text/css" rel="stylesheet" href="/css/common/spinkit.css"></link>
+		<link type="text/css" rel="stylesheet" href="/css/dist/edit/edit.min.css"></link>
+	</head>
+	<body>
+		<div class="edit-main" id="container" ng-controller="controller" ng-init="load()">
+       	<input type="hidden" th:value="${id}" id="widget_id"/>
+       	<input type="hidden" th:value="${is_canvas}" id="is_canvas"/>
+
+        <!--  --><div class="header">
+        <div class="logo-container">
+        <div id="logo">
+					<img src="/img/logo_txl.png">
+					<span>Scenario Canvas</span>
+				</div>
+				</div>
+
+        	<div class="edit-header-bar">
+					<x-ctrl-list widget="widget"></x-ctrl-list>
+					</div>
+            <div class="header-ctrl fr">
+    <ul>
+                    <li><a href="javascript:window.location.reload()" class="header-ctrl-btn"><i class="fa fa-undo"></i>复原 </a></li>
+
+                    <li><a href="/" class="header-ctrl-btn"><i class='fa fa-trash'></i>放弃 </a></li>
+
+                    <li><a href="#" ng-click="save()" class="header-ctrl-btn"><i class='fa fa-save'></i>保存 </a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="loading-spinner sk-fading-circle" ng-show="loading">
+              <div class="sk-circle1 sk-circle"></div>
+              <div class="sk-circle2 sk-circle"></div>
+              <div class="sk-circle3 sk-circle"></div>
+              <div class="sk-circle4 sk-circle"></div>
+              <div class="sk-circle5 sk-circle"></div>
+              <div class="sk-circle6 sk-circle"></div>
+              <div class="sk-circle7 sk-circle"></div>
+              <div class="sk-circle8 sk-circle"></div>
+              <div class="sk-circle9 sk-circle"></div>
+              <div class="sk-circle10 sk-circle"></div>
+              <div class="sk-circle11 sk-circle"></div>
+              <div class="sk-circle12 sk-circle"></div>
+        </div>
+
+        <div class="edit-panel" ng-cloak ng-class="{true:'vh',false:'vv'}[loading]">
+            <!--尝试采用display: table-cell 设置布局， 发现resizer滑动到边界是table cell无法隐藏-->
+
+
+            <section class="left">
+                <div class="scroller" style="height:100%;overflow:auto;"> <!--多余的div用于解决scroll的时候resizebar悬空的情况-->
+                    <div class="panel-content ">
+                        <div class="tree-root">
+                             <x-components-tree widget="widget" root="true"></x-components-tree>
+                        </div>
+                    </div>
+                </div>
+                <x-resizer position="right" direction='horizental' maxoffset="200" resizeclass="" callbackmoving="hide_scrollbar(offset_x, offset_y)" callbackover="show_scrollbar(offset_x, offset_y)"></x-resizer>
+            </section>
+
+            <section class="middle scroller">
+                    <div class="editing-widget-wrapper" >
+                        <div ng-if="widget.isCanvas==false">
+                            <div class="editing-widget" ng-style="widget_style">
+                                <x-resizer position="right" direction='horizental' max="30%" resizeclass="invisible-resize-bar" double='true' callbackover="reflow()"></x-resizer>
+                                <div class="widget-header">{{widget.name}}</div>
+                                <div class="widget-content">
+                                   <div style="height: 100%;">
+                                        <x-widget widget="widget" root="true">
+                                        </x-widget>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="widget.isCanvas==true" style="height:100%;">
+                            <div class="editing-canvas canvas">
+                                <div class="widget-content">
+                                   <div style="height: 100%;">
+                                        <x-canvas widget="widget" root="true">
+                                        </x-canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+            <div class="clear"></div>
+        </div>
+        <div class="properties-panel"  ng-class="{true:'vh',false:'vv'}[loading]">
+            <div properties-component ctrl="$root.current_ctrl"></div>
+        </div>
+    </div>
+
+
+		<script type="text/javascript" src="/js/common/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/common/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/js/common/jquery.nicescroll.min.js"></script>
+		<script type="text/javascript" src="/js/common/underscore-min.js"></script>
+		<script type="text/javascript" src="/js/common/underscore.string.min.js"></script>
+        <script type="text/javascript" src="/js/common/highstock.js"></script>
+        <script type="text/javascript" src="/js/common/highcharts-more.js"></script>
+        <script type="text/javascript" src="/js/common/highcharts-solidgauge.js"></script>
+		<script type="text/javascript" src="/js/common/angular.js"></script>
+		<script type="text/javascript" src="/js/common/angular-animate.js"></script>
+		<script type="text/javascript" src="/js/common/angular-sanitize.js"></script>
+		<script type="text/javascript" src="/js/common/ng-file-upload-all.min.js"></script>
+        <script type="text/javascript" src="/js/common/processBar.min.js"></script>
+		<script type="text/javascript" src="/js/common/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/common/ui-bootstrap.js"></script>
+		<script type="text/javascript" src="/js/common/ui-bootstrap-tpls.js"></script>
+		<script type="text/javascript" src="/js/common/bootstrap-colorpicker-module.min.js"></script>
+		<script type="text/javascript" src="/js/dist/edit/app.js"></script>
+		<script>
+			_.mixin(s.exports());
+			$(function(){
+	            var nice = $(".scroller").niceScroll({cursorcolor:"#999"});
+	        })
+			angular.element(document).ready(function() {
+            	angular.bootstrap(document.getElementById("container"),['widget']);
+        	})
+		</script>
+	</body>
+</html>
