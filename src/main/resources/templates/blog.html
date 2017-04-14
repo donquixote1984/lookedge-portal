@@ -1,0 +1,29 @@
+<html layout:decorator="layout">
+<head>
+    <link rel="stylesheet" href="css/login.css" >
+</head>
+<body>
+<div layout:fragment="content">
+    <style>
+        #blog {
+            width: 100%;
+            border: 0 none;
+            margin: 0;
+            padding: 0;
+            min-height: 1200px;
+        }
+    </style>
+    <script type="text/javascript">
+        function iframeLoaded() {
+            var iFrameID = document.getElementById('blog');
+            if(iFrameID) {
+                // here you can make the height, I delete it first, then I make it again
+                iFrameID.height = "";
+                iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+            }
+        }
+    </script>
+    <iframe id="blog" th:src="${wpAddress}" onload="iframeLoaded()"></iframe>
+</div>
+</body>
+</html>

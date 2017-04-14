@@ -51,7 +51,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/", "/favicon.ico", "/resources/**","/templates/**", "/widget/html/**","/api/**","/static/**","/signup", "/console/**", "/img/**").permitAll()
+                .antMatchers("/", "/blog","/about","/doc","/favicon.ico", "/resources/**","/templates/**", "/widget/html/**","/api/**","/static/**","/signup", "/console/**", "/img/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
