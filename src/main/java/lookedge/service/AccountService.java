@@ -53,6 +53,16 @@ public class AccountService  implements UserDetailsService {
         return createUser(account);
     }
 
+    public Boolean checkUserExists(String username){
+        Account account = accountRepository.findOneByEmail(username);
+        if(account != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public void signin(Account account) {
         SecurityContextHolder.getContext().setAuthentication(authenticate(account));
     }

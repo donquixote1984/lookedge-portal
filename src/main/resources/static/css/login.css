@@ -24,3 +24,8 @@ footer {
 	padding: 5px;
 	color:#c74a4a;
 }
+.error-block {
+    margin:4px 0;
+    color:#b92c28;
+    font-weight:bold;
+}

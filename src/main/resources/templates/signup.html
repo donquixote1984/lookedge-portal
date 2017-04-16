@@ -4,54 +4,61 @@
 </head>
 <body>
 <div layout:fragment="content">
-<div class="login-container">
-    <div class="row-fluid">
-        <div class="col-lg-4 col-lg-offset-4">
-            <div class="login-form-container">
-                <h4 class="login-header">
-                   Sign Up
-                </h4>
-                <form action="/signup" class="login-form form-horizontal" method="POST" th:action="@{/signup}" th:object="${signupForm}">
-                    <div class="form-group">
-                        <label for="email" class="col-sm-3 control-label">Email</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="email" placeholder="Email address" th:field="*{email}" />
-                            <span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">邮件地址不规范 </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="col-sm-3 control-label">Password</label>
-                        <div class="col-sm-7">
-                            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
-                            <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">密码不规范  </span>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="password" class="col-sm-3 control-label">Confirm Password</label>
-                        <div class="col-sm-7">
-                            <input type="password" class="form-control" id="comfirmpassword" placeholder="Confirm Password" th:field="*{confirmPassword}"/>
-                            <span class="help-block" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">密码不正确</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-lg-offset-3 col-lg-2">
-                            <button type="submit" class="btn btn-default">Sign Up </button>
+    <div class="login-container container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="login-form-container">
+                    <h4 class="login-header" th:text="#{user.signup}">
+                        Sign Up
+                    </h4>
+                    <form action="/signup" class="login-form form-horizontal" method="POST" th:action="@{/signup}" th:object="${signupForm}">
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label" th:text="#{signup.email}"></label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="email" placeholder="Email address" th:field="*{email}" />
+                                <div class="error-block">
+                                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </span>&nbsp;
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-lg-6">
-                            <p> <a href="login" style="display:block;margin-top:5px">Already have an account? Sign In</a> </p>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-3 control-label" th:text="#{signup.password}"></label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
+                                <div class="error-block">
+                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>&nbsp;
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                </form>
+
+                        <div class="form-group">
+                            <label for="password" class="col-sm-3 control-label" th:text="#{signup.confirmPassword}">Confirm Password</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="comfirmpassword" placeholder="Confirm Password" th:field="*{confirmPassword}"/>
+                                <div class="error-block">
+                                    <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+                                    <span th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></span>&nbsp;
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-2">
+                                <button type="submit" class="btn btn-default" th:text="#{signup.submit}">Sign Up </button>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p> <a href="login" style="display:block;margin-top:5px" th:text="#{signup.already}">Already have an account? Sign In</a> </p>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

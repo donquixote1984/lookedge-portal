@@ -1,6 +1,6 @@
 <html layout:decorator="layout">
 <head>
-    <link rel="stylesheet" href="css/login.css" >
+    <script src="js/iframeResizer.min.js"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -13,17 +13,11 @@
             min-height: 1200px;
         }
     </style>
+
+    <iframe id="blog" th:src="${wpAddress}" ></iframe>
     <script type="text/javascript">
-        function iframeLoaded() {
-            var iFrameID = document.getElementById('blog');
-            if(iFrameID) {
-                // here you can make the height, I delete it first, then I make it again
-                iFrameID.height = "";
-                iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
-            }
-        }
+        iFrameResize();
     </script>
-    <iframe id="blog" th:src="${wpAddress}" onload="iframeLoaded()"></iframe>
 </div>
 </body>
 </html>

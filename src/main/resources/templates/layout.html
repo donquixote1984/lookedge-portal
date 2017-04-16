@@ -8,47 +8,46 @@
 </head>
 <body>
 
-    <div class='contents'>
-        <header>
-            <div class='logo'>
-                LOOKEDGE
-            </div>
-            <nav>
-                <ul>
-                    <li class='selected'><a href="#">PRODUCT</a></li>
-                    <li><a href="#">DEVELOPER</a></li>
-                    <li><a href="#">BLOG</a></li>
-                    <li><a href="#">ABOUT US</a></li>
-                </ul>
-            </nav>
+<div class='contents'>
+    <header>
+        <div class='logo'>
+            LOOKEDGE
+        </div>
+        <nav>
+            <ul>
+                <li class='selected'><a href="/" th:text="#{menu.product}">PRODUCT</a></li>
+                <li><a href="/doc" th:text="#{menu.developer}">DEVELOPER</a></li>
+                <li><a href="/blog" th:text="#{menu.blog}">BLOG</a></li>
+                <li><a href="/about" th:text="#{menu.about}">ABOUT US</a></li>
+            </ul>
+        </nav>
 
         <div class='login' th:if="${#authorization.expression('isAuthenticated()')}">
-            <a href="#">Welcome <span th:text="${#authentication.name}"></span></a>
+            <a href="#"><span th:text="#{user.welcome}">Welcome</span> <span th:text="${#authentication.name}"></span></a>
             <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
                 <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
             </a>
             <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
         </div>
         <div class='login' th:unless="${#authorization.expression('isAuthenticated()')}">
-                <a href='/signin'>Sign In</a>
-                <a href='/signup'>Sign Up</a>
+            <a href='/signin' th:text="#{user.signin}">Sign In</a>
+            <a href='/signup' th:text="#{user.signup}">Sign Up</a>
         </div>
-        </header>
-        <div class="main" layout:fragment="content">
+    </header>
+    <div class="main" layout:fragment="content">
 
-        </div>
-        <footer>
-            <ul>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">About Us</a></li>
-            </ul>
-
-            <div class='at2017'>
-                @ 2017 LookEdge
-            </div>
-        </footer>
     </div>
+    <footer>
+        <ul>
+            <li><a href="#" th:text="#{footer.terms}">Terms</a></li>
+            <li><a href="#" th:text="#{footer.privacy}">Privacy</a></li>
+            <li><a href="#" th:text="#{footer.about}">About Us</a></li>
+        </ul>
+
+        <div class='at2017'>
+            @ 2017 LookEdge
+        </div>
+    </footer>
+</div>
 </body>
 </html>
-

@@ -37,15 +37,14 @@ public class AuthController {
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
     public String signup(@Valid @ModelAttribute SignupForm signupForm, BindingResult errors, RedirectAttributes ra) {
+        if(accountService.checkUserExists(signupForm.getEmail())) {
+            errors.rejectValue("email", "Duplicate");
+        }
+
         if (errors.hasErrors()) {
             return "signup";
         }
 
-        try {
-            accountService.loadUserByUsername(signupForm.getEmail());
-        } catch(UsernameNotFoundException e) {
-            //https://hellokoding.com/registration-and-login-example-with-spring-xml-configuration-maven-jsp-and-mysql/
-        }
         Account account = accountService.save(signupForm.createAccount());
         accountService.signin(account);
         return "redirect:/";
