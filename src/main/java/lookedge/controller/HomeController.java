@@ -24,7 +24,7 @@ public class HomeController{
 
     @RequestMapping(value="/")
     public String home(Map model){
-        return "/home";
+        return "home";
     }
 
     @RequestMapping(value="/test")
@@ -35,16 +35,16 @@ public class HomeController{
     @RequestMapping(value="/blog")
     public String blog(Map model){
         model.put("wpAddress", "//"+wpServer+":"+wpPort);
-        return "/blog";
+        return "blog";
     }
     @RequestMapping(value="/about")
     public String about(){
-        return "/about";
+        return "about";
     }
 
     @RequestMapping(value="/doc")
     public String doc(){
-        return "/doc";
+        return "doc";
     }
 
     @RequestMapping(value="/lang/{lang}")
@@ -57,6 +57,6 @@ public class HomeController{
             localeResolver.setLocale(request, response, new Locale("en", "US"));
         }
 
-        return "/home";
+        return "home";
     }
 }
